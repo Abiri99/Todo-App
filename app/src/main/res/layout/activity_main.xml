@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:padding="20dp"
-    android:backgroundTint="#ffffff"
+    android:background="#ffffff"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="145dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:backgroundTint="#FFBA74"
         android:clickable="true"
         android:onClick="onAddItem"
@@ -84,6 +84,7 @@
         android:id="@+id/rvTodos"
         android:layout_width="379dp"
         android:layout_height="473dp"
+        android:foreground="@drawable/bg_gradient3"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"

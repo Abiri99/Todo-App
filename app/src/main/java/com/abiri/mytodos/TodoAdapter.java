@@ -18,6 +18,7 @@ import java.util.List;
 public class TodoAdapter extends
         RecyclerView.Adapter<TodoAdapter.ViewHolder> {
 
+
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -46,6 +47,7 @@ public class TodoAdapter extends
     public TodoAdapter(List<Todo> todos) {
         mTodos = todos;
     }
+
 
     // Usually involves inflating a layout from XML and returning the holder
     @Override

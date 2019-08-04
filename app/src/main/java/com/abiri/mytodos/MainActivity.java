@@ -25,6 +25,7 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     TextView day_num, month, year;
+    RecyclerView rvTodos;
 
     private ArrayList<Todo> todos;
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Lookup the recyclerview in activity layout
-        RecyclerView rvTodos = (RecyclerView) findViewById(R.id.rvTodos);
+        rvTodos = (RecyclerView) findViewById(R.id.rvTodos);
 
         // Initialize contacts
         todos = Todo.createTodoList(20);
@@ -88,13 +89,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            hideSystemUI();
-        }
-    }
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+//        if (hasFocus) {
+//            hideSystemUI();
+//        }
+//    }
 
     // This snippet hides the system bars.
     private void hideSystemUI() {
@@ -105,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
     }

@@ -35,6 +35,8 @@ public class Todo {
     public static ArrayList<Todo> createTodoList(int number) {
         ArrayList<Todo> todos = new ArrayList<Todo>();
 
+        todos.add(new Todo(""));
+
         for (int i = 1; i <= number; i++) {
             todos.add(new Todo("Todo " + ++lastContactId));
         }
