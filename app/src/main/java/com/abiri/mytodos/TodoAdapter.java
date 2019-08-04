@@ -96,7 +96,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
                     onTodoListener.onTodoClick(getAdapterPosition());
                     break;
                 case R.id.todo_done:
-                    onTodoListener.onDoneClick(getAdapterPosition());
+                    onTodoListener.onDoneClick(getAdapterPosition(), itemView);
                     break;
                 case R.id.todo_remove:
                     onTodoListener.onRemoveClick(getAdapterPosition());
@@ -110,7 +110,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
 
     public interface OnTodoListener {
         void onTodoClick(int position);
-        void onDoneClick(int position);
+        void onDoneClick(int position, View view);
         void onRemoveClick(int position);
     }
 }

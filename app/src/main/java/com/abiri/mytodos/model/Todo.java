@@ -1,5 +1,9 @@
 package com.abiri.mytodos.model;
 
+import android.view.View;
+
+import com.abiri.mytodos.R;
+
 import java.io.Console;
 import java.util.ArrayList;
 
@@ -25,6 +29,7 @@ public class Todo {
 
     public void setDone(Boolean done) {
         isDone = done;
+
     }
 
     public Boolean isDone() {

@@ -73,8 +73,9 @@ public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTod
     }
 
     @Override
-    public void onDoneClick(int position) {
+    public void onDoneClick(int position, View v) {
         todos.get(position).setDone(true);
+        v.findViewById(R.id.todo_line).setVisibility(View.VISIBLE);
     }
 
     @Override
