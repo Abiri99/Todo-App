@@ -83,16 +83,34 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
             todo_remove = (ImageView) itemView.findViewById(R.id.todo_remove);
 
             // TODO: 8/4/2019 maybe i need to seperate view.set.... s.
-            itemView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
+            todo_description.setOnClickListener(this);
+            todo_done.setOnClickListener(this);
+            todo_remove.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            onTodoListener.onTodoClick(getAdapterPosition());
+            switch (v.getId()) {
+                case R.id.todo_description:
+                    onTodoListener.onTodoClick(getAdapterPosition());
+                    break;
+                case R.id.todo_done:
+                    onTodoListener.onDoneClick(getAdapterPosition());
+                    break;
+                case R.id.todo_remove:
+                    onTodoListener.onRemoveClick(getAdapterPosition());
+                    break;
+                default:
+                    break;
+            }
+            //onTodoListener.onTodoClick(getAdapterPosition());
         }
     }
 
     public interface OnTodoListener {
         void onTodoClick(int position);
+        void onDoneClick(int position);
+        void onRemoveClick(int position);
     }
 }

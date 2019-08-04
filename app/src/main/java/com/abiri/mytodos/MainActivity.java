@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTod
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize contacts
+        todos = Todo.createTodoList(20);
+
         this.initRecyclerView();
 
         this.initializeViews();
@@ -69,12 +72,21 @@ public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTod
         startActivity(intent);
     }
 
+    @Override
+    public void onDoneClick(int position) {
+        todos.get(position).setDone(true);
+    }
+
+    @Override
+    public void onRemoveClick(int position) {
+        todos.remove(position);
+        initRecyclerView();
+    }
+
     public void initRecyclerView() {
         // Lookup the recyclerview in activity layout
         rvTodos = (RecyclerView) findViewById(R.id.rvTodos);
 
-        // Initialize contacts
-        todos = Todo.createTodoList(20);
         // Create adapter passing in the sample user data
         TodoAdapter adapter = new TodoAdapter(todos, this);
         // Attach the adapter to the recyclerview to populate items
