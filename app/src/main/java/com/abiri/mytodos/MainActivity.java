@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTodoListener {
 
     TextView day_num, month, year;
     RecyclerView rvTodos;
@@ -34,38 +34,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.initRecyclerView();
 
-        // Lookup the recyclerview in activity layout
-        rvTodos = (RecyclerView) findViewById(R.id.rvTodos);
+        this.initializeViews();
 
-        // Initialize contacts
-        todos = Todo.createTodoList(20);
-        // Create adapter passing in the sample user data
-        TodoAdapter adapter = new TodoAdapter(todos);
-        // Attach the adapter to the recyclerview to populate items
-        rvTodos.setAdapter(adapter);
-        // Set layout manager to position the items
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        mLayoutManager.setReverseLayout(true);
-        mLayoutManager.setStackFromEnd(true);
-        rvTodos.setLayoutManager(mLayoutManager);
-        // That's all!
-
-
-
-        day_num = findViewById(R.id.day_num);
-        month = findViewById(R.id.month);
-        year = findViewById(R.id.year);
-
-        Date c = Calendar.getInstance().getTime();
-
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-        String formattedDate = df.format(c);
-
-        day_num.setText(formattedDate.split("-")[0]);
-        month.setText(formattedDate.split("-")[1]);
-        year.setText(formattedDate.split("-")[2]);
-
+        this.setCurrentTime();
     }
 
     // REQUEST_CODE can be any value we like, used to determine the result type later
@@ -87,6 +60,50 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
             todos.add(todo);
         }
+    }
+
+    @Override
+    public void onTodoClick(int position) {
+        todos.get(position);
+        Intent intent = new Intent(this, TodoDetailActivity.class);
+        startActivity(intent);
+    }
+
+    public void initRecyclerView() {
+        // Lookup the recyclerview in activity layout
+        rvTodos = (RecyclerView) findViewById(R.id.rvTodos);
+
+        // Initialize contacts
+        todos = Todo.createTodoList(20);
+        // Create adapter passing in the sample user data
+        TodoAdapter adapter = new TodoAdapter(todos, this);
+        // Attach the adapter to the recyclerview to populate items
+        rvTodos.setAdapter(adapter);
+        // Set layout manager to position the items
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        rvTodos.setLayoutManager(mLayoutManager);
+        // That's all!
+    }
+
+    public void setCurrentTime() {
+        Date c = Calendar.getInstance().getTime();
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c);
+
+        day_num.setText(formattedDate.split("-")[0]);
+        month.setText(formattedDate.split("-")[1]);
+        year.setText(formattedDate.split("-")[2]);
+    }
+
+    public void initializeViews() {
+
+        day_num = findViewById(R.id.day_num);
+        month = findViewById(R.id.month);
+        year = findViewById(R.id.year);
+
     }
 
 //    @Override

@@ -15,38 +15,18 @@ import java.util.List;
 
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ViewHolder which gives us access to our views
-public class TodoAdapter extends
-        RecyclerView.Adapter<TodoAdapter.ViewHolder> {
-
-
-    // Provide a direct reference to each of the views within a data item
-    // Used to cache the views within the item layout for fast access
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        // Your holder should contain a member variable
-        // for any view that will be set as you render a row
-        public TextView todo_description;
-        public ImageView todo_done, todo_remove;
-
-        // We also create a constructor that accepts the entire item row
-        // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
-            super(itemView);
-
-            todo_description = (TextView) itemView.findViewById(R.id.todo_description);
-            todo_done = (ImageView) itemView.findViewById(R.id.todo_done);
-            todo_remove = (ImageView) itemView.findViewById(R.id.todo_remove);
-        }
-    }
+public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
 
 
     // Store a member variable for the contacts
     private List<Todo> mTodos;
 
+    private OnTodoListener onTodoListener;
+
     // Pass in the contact array into the constructor
-    public TodoAdapter(List<Todo> todos) {
+    public TodoAdapter(List<Todo> todos, OnTodoListener onTodoListener) {
         mTodos = todos;
+        this.onTodoListener = onTodoListener;
     }
 
 
@@ -60,7 +40,7 @@ public class TodoAdapter extends
         View todoView = inflater.inflate(R.layout.todo_item_layout, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(todoView);
+        ViewHolder viewHolder = new ViewHolder(todoView, onTodoListener);
         return viewHolder;
     }
 
@@ -79,5 +59,40 @@ public class TodoAdapter extends
     @Override
     public int getItemCount() {
         return mTodos.size();
+    }
+
+    // Provide a direct reference to each of the views within a data item
+    // Used to cache the views within the item layout for fast access
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        // Your holder should contain a member variable
+        // for any view that will be set as you render a row
+        public TextView todo_description;
+        public ImageView todo_done, todo_remove;
+        OnTodoListener onTodoListener;
+
+        // We also create a constructor that accepts the entire item row
+        // and does the view lookups to find each subview
+        public ViewHolder(View itemView, OnTodoListener onTodoListener) {
+            // Stores the itemView in a public final member variable that can be used
+            // to access the context from any ViewHolder instance.
+            super(itemView);
+            this.onTodoListener = onTodoListener;
+
+            todo_description = (TextView) itemView.findViewById(R.id.todo_description);
+            todo_done = (ImageView) itemView.findViewById(R.id.todo_done);
+            todo_remove = (ImageView) itemView.findViewById(R.id.todo_remove);
+
+            // TODO: 8/4/2019 maybe i need to seperate view.set.... s.
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onTodoListener.onTodoClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnTodoListener {
+        void onTodoClick(int position);
     }
 }
