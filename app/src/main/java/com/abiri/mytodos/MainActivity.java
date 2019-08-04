@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
         itemsAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, items);
         lvItems.setAdapter(itemsAdapter);
+        items.add("");
+        items.add("");
+        items.add("");
         items.add("First Item");
         items.add("Second Item");
         items.add("Second Item");
@@ -66,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
         items.add("Second Item");
         items.add("Second Item");
         items.add("Second Item");
+        items.add("");
+        items.add("");
+        items.add("");
+        items.add("");
+        items.add("");
     }
 
     // REQUEST_CODE can be any value we like, used to determine the result type later
