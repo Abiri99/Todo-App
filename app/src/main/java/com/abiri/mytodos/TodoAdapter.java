@@ -40,6 +40,7 @@ public class TodoAdapter extends
         }
     }
 
+
     // Store a member variable for the contacts
     private List<Todo> mTodos;
 
