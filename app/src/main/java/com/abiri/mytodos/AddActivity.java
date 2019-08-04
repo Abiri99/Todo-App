@@ -15,14 +15,12 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        title = (EditText) findViewById(R.id.title);
         description = (EditText) findViewById(R.id.description);
     }
 
     public void onSaveItem(View view) {
         Intent intent = new Intent();
-        intent.putExtra("title", title.getText().toString());
-        intent.putExtra("description", description.getText().toString());
+        intent.putExtra("todo_description", description.getText().toString());
         setResult(RESULT_OK, intent);
         finish();
     }
